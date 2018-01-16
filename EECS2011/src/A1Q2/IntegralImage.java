@@ -73,26 +73,35 @@ public class IntegralImage {
 			throws BoundaryViolationException, NullSubImageException {
 		
 		if(
-				top < 0 || 							// if top is smaller then array height 0
-				bottom > integralImage.length || 	// if bottom is bigger then array height
-				left < 0 ||							// if left is smaller then array width 0
-				right > integralImage[0].length		// if right is bigger then array width
-		) 
+				top < 0 						|| 	// if top is smaller then array height 0
+				bottom > integralImage.length 	|| 	// if bottom is bigger then array height
+				left < 0 						||	// if left is smaller then array width 0
+				right > integralImage[0].length)	// if right is bigger then array width
 		{
-			throw new BoundaryViolationException();
+			throw new BoundaryViolationException();	// throw exception
 		}
 		
 		if (
-				top > bottom ||
-				left > right
+				top > bottom || //-----------------	//if top is bigger then bottom
+				left > right //--------------------	//if left is bigger than right
 		)
 		{
-			throw new NullSubImageException();
+			throw new NullSubImageException();		//throw exception
 		}
 		
-		//todo#############################
+		double totalImageSum = 0;
 		
-		// implement this method
-		return 0; // dummy value - remove once coded.
+		for(int a = top ; a <= bottom ; a++) {
+			for(int b = left ; b <= right ; b++ ) {
+				totalImageSum += integralImage[a][b];
+			}
+		}
+		
+		double n = (bottom - top) + (right - left) + 2;
+		
+		double mean = (double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(totalImageSum / n);
+		
+		return mean;
 	}
+	
 }
