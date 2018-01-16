@@ -99,7 +99,7 @@ public class IntegralImage {
 		
 		double n = (bottom - top) + (right - left) + 2;
 		
-		double mean = (double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(double)(totalImageSum / n);
+		double mean = (double)(totalImageSum / n);
 		
 		return mean;
 	}
