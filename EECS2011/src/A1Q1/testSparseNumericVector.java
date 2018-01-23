@@ -69,4 +69,14 @@ public class testSparseNumericVector {
     	assertEquals(3,X.getSize(),"Size must be 3 when you add three elements!");
     }
     
+    @Test
+    public void Test5_RemovingOneCheckSize() {
+    	SparseNumericVector X = new SparseNumericVector();
+    	X.add(new SparseNumericElement(15, 3));
+    	X.add(new SparseNumericElement(1500, 3.14));
+    	X.add(new SparseNumericElement(15000, 3.141));
+    	X.remove(15L);
+    	assertEquals(2,X.getSize(),"Size must be 2!");
+    }
+    
 }
