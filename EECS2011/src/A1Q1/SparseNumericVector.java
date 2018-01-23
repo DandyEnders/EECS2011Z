@@ -62,6 +62,7 @@ public class SparseNumericVector implements Iterable {
 		  SparseNumericNode node = new SparseNumericNode(e, null);
 		  this.head = node;
 		  this.tail = node;
+		  this.size++;
 		  return;
 	  }
 	  
@@ -79,6 +80,8 @@ public class SparseNumericVector implements Iterable {
 	  
 	  //case 3 	list and element are non-empty, and no element with same index exist
 	  // 		add nodal element in the list
+	  
+	  this.size++;
 	  
 	  //case 3.1 inserted in head
 	  if(e.getIndex() < this.head.getElement().getIndex()){
@@ -112,7 +115,7 @@ public class SparseNumericVector implements Iterable {
 		  
 	  }
 	  
-	  this.size++;
+	  
 	  
     }
 
