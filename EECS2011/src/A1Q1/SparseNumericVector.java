@@ -112,6 +112,8 @@ public class SparseNumericVector implements Iterable {
 		  
 	  }
 	  
+	  this.size++;
+	  
     }
 
     /**
@@ -132,6 +134,8 @@ public class SparseNumericVector implements Iterable {
     		return false;
     	}
     	
+    	this.size--;
+    	
     	//case 1.1 remove head
     	if(this.head.getElement().getIndex() == index){
     		SparseNumericNode newHead = this.head.getNext();
@@ -144,24 +148,25 @@ public class SparseNumericVector implements Iterable {
     	if(this.tail.getElement().getIndex() == index){
     		
     		return true;
-    	}
-    	
-    	//case 1.3 remove middle
-    	while(itr.hasNext()){
-    		SparseNumericNode nodeFirst = itr.position;
-    		SparseNumericNode nodeSecond = nodeFirst.getNext();
-    		SparseNumericNode nodeThird = nodeSecond.getNext();
-    		itr.next();
-			
-    		if(nodeSecond.getElement().getIndex() == index){
-    			nodeFirst.setNext(nodeThird);
-    			nodeSecond.setNext(null);
-    			return true;
-    		}
     		
-    		if(nodeThird.equals(this.tail)){
-    			break;
-    		}
+    	//case 1.3 remove middle
+    	}else {
+	    	while(itr.hasNext()){
+	    		SparseNumericNode nodeFirst = itr.position;
+	    		SparseNumericNode nodeSecond = nodeFirst.getNext();
+	    		SparseNumericNode nodeThird = nodeSecond.getNext();
+	    		itr.next();
+				
+	    		if(nodeSecond.getElement().getIndex() == index){
+	    			nodeFirst.setNext(nodeThird);
+	    			nodeSecond.setNext(null);
+	    			return true;
+	    		}
+	    		
+	    		if(nodeThird.equals(this.tail)){
+	    			break;
+	    		}
+	    	}
     	}
         return false; 
     }
