@@ -79,4 +79,27 @@ public class testSparseNumericVector {
     	assertEquals(2,X.getSize(),"Size must be 2!");
     }
     
+    @Test
+    public void Test6_RemovingTwoCheckSize() {
+    	SparseNumericVector X = new SparseNumericVector();
+    	X.add(new SparseNumericElement(15, 3));
+    	X.add(new SparseNumericElement(1500, 3.14));
+    	X.add(new SparseNumericElement(15000, 3.141));
+    	X.remove(15L);
+    	X.remove(1500L);
+    	assertEquals(1,X.getSize(),"Size must be 1!");
+    }
+    
+    @Test
+    public void Test7_RemovingThreeCheckSize() {
+    	SparseNumericVector X = new SparseNumericVector();
+    	X.add(new SparseNumericElement(15, 3));
+    	X.add(new SparseNumericElement(1500, 3.14));
+    	X.add(new SparseNumericElement(15000, 3.141));
+    	X.remove(15L);
+    	X.remove(1500L);
+    	X.remove(15000L);
+    	assertEquals(0,X.getSize(),"Size must be 0!");
+    }
+    
 }

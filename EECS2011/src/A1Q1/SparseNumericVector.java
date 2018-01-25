@@ -167,6 +167,7 @@ public class SparseNumericVector implements Iterable {
 	    		}
 	    		
 	    		if(nodeThird.equals(this.tail)){
+	    			size++;
 	    			break;
 	    		}
 	    	}
