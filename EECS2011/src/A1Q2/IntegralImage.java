@@ -50,18 +50,22 @@ public class IntegralImage {
 		// create a new 2D array containing rectangular sums
 
 		rectangularTotal = new int[imageHeight][imageWidth];
+		
 		for (int i = 0; i < rectangularTotal.length; i++) {
 			for (int j = 0; j < rectangularTotal[0].length; j++) {
-				int rectangularPartialSum = 0;
-
-				for (int a = 0; a <= i; a++) {
-					for (int b = 0; b <= j; b++) {
-						rectangularPartialSum += integralImage[a][b]; // add all rectangular sums
-					}
+				
+				if(i == 0 && j == 0) { // 0 0
+					rectangularTotal[0][0] = integralImage[0][0];
+				}else if (i == 0) { // first row
+					rectangularTotal[i][j] = rectangularTotal[i][j-1] + integralImage[i][j];
+				}else if (j == 0) { // first column
+					rectangularTotal[i][j] = rectangularTotal[i-1][j] + integralImage[i-1][j];
+				}else {
+					rectangularTotal[i][j] = 0 - rectangularTotal[i-1][j-1] + rectangularTotal[i-1][j]
+											+rectangularTotal[i][j-1] + integralImage[i][j];
 				}
-
-				rectangularTotal[i][j] = rectangularPartialSum; // sub into the
-
+				
+				
 			}
 		}
 
