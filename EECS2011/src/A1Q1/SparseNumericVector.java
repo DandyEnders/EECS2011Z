@@ -87,28 +87,29 @@ public class SparseNumericVector implements Iterable {
 	  if(e.getIndex() < this.head.getElement().getIndex()){
 		 SparseNumericNode node = new SparseNumericNode(e, this.head);
 		 this.head = node;
-	  }else 
-		  
-		  
-	  //case 3.2 inserted in tail
-	  if(e.getIndex() > this.tail.getElement().getIndex()){
+		 return;
+	  }else if(e.getIndex() > this.tail.getElement().getIndex()){ //case 3.2 inserted in tail
 		 SparseNumericNode node = new SparseNumericNode(e, null);
 		 this.tail.setNext(node);
-	  }
-	  
-	  //case 3.3 inserted in middle
-	  else{
+		 this.tail = node;
+		 return;
+	  }else{ //case 3.3 inserted in middle
 		  //refresh iterator
-		  itr = new SparseNumericIterator(this);
-		  while(itr.hasNext()){
-			  SparseNumericNode position = itr.position;
-			  SparseNumericElement elemFirst = itr.next();
-			  SparseNumericElement elemSecond = itr.position.getElement();
+		  SparseNumericIterator itr2 = new SparseNumericIterator(this);
+		  while(itr2.hasNext()){
+			  
+			  SparseNumericNode position = itr2.position;
+			  SparseNumericNode position2 = position.getNext();
+			  
+			  SparseNumericElement elemFirst = position.getElement();
+			  SparseNumericElement elemSecond = position2.getElement();
+			  
+			  itr2.next();
 			  
 			  if(elemFirst.getIndex() < e.getIndex() && elemSecond.getIndex() > e.getIndex()){
-				  SparseNumericNode node = new SparseNumericNode(e, position.getNext());
+				  SparseNumericNode node = new SparseNumericNode(e, position2);
 				  position.setNext(node);
-				  break;
+				  return;
 			  }
 			  
 		  }

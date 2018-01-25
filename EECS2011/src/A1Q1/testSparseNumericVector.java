@@ -3,12 +3,17 @@ package A1Q1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 
 /**
  *
  * @author jameselder
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+	
 public class testSparseNumericVector {
 
     /**
@@ -49,6 +54,7 @@ public class testSparseNumericVector {
     public void Test2_AddOneAndCheckSize() {
     	SparseNumericVector X = new SparseNumericVector();
     	X.add(new SparseNumericElement(15, 3));
+    	System.out.println(X.toString()+"\n-");
     	assertEquals(1,X.getSize(),"Size must be 1 when you add one element!");
     }
     
@@ -57,6 +63,7 @@ public class testSparseNumericVector {
     	SparseNumericVector X = new SparseNumericVector();
     	X.add(new SparseNumericElement(15, 3));
     	X.add(new SparseNumericElement(1500, 3.14));
+    	System.out.println(X.toString()+"\n-");
     	assertEquals(2,X.getSize(),"Size must be 2 when you add two elements!");
     }
     
@@ -66,6 +73,7 @@ public class testSparseNumericVector {
     	X.add(new SparseNumericElement(15, 3));
     	X.add(new SparseNumericElement(1500, 3.14));
     	X.add(new SparseNumericElement(15000, 3.141));
+    	System.out.println(X.toString()+"\n-");
     	assertEquals(3,X.getSize(),"Size must be 3 when you add three elements!");
     }
     
@@ -76,6 +84,7 @@ public class testSparseNumericVector {
     	X.add(new SparseNumericElement(1500, 3.14));
     	X.add(new SparseNumericElement(15000, 3.141));
     	X.remove(15L);
+    	System.out.println(X.toString()+"\n-");
     	assertEquals(2,X.getSize(),"Size must be 2!");
     }
     
@@ -87,6 +96,7 @@ public class testSparseNumericVector {
     	X.add(new SparseNumericElement(15000, 3.141));
     	X.remove(15L);
     	X.remove(1500L);
+    	System.out.println(X.toString()+"\n-");
     	assertEquals(1,X.getSize(),"Size must be 1!");
     }
     
@@ -99,6 +109,7 @@ public class testSparseNumericVector {
     	X.remove(15L);
     	X.remove(1500L);
     	X.remove(15000L);
+    	System.out.println(X.toString()+"\n-");
     	assertEquals(0,X.getSize(),"Size must be 0!");
     }
     
