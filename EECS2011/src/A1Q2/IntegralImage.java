@@ -124,7 +124,7 @@ public class IntegralImage {
 		
 		totalImageSum = rightBottomTotalSum - topRectangleSum - leftRectangleSum + overlapSum;
 
-		double n = (bottom - top) + (right - left) + 2;
+		double n = (bottom - top + 1) * (right - left + 1);
 
 		double mean = (double) (totalImageSum / n);
 

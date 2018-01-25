@@ -7,17 +7,16 @@ package A1Q2;
 public class testIntegralImage {
 
     public static void main(String[] args) {
-        int[][] image1 = {{1, 2, 3}, 
-        				  {4, 5, 6}, 
-        				  {7, 8, 9}};
+        int[][] image1 = {{1,2,5,7,2,8,0,6,4,6},{9,8,0,4,9,5,10,7,10,3},{7,6,10,2,0,10,4,9,10,8},{3,8,1,5,4,8,0,9,5,8},{9,5,0,1,3,4,1,9,6,1},{1,2,5,6,9,9,0,2,4,0},{1,2,4,1,6,6,10,4,2,5},{5,6,2,10,5,3,9,10,10,2}};
+        
         int top,bottom,left,right;
         double mean;
 
         IntegralImage integralImage1;
-        top = 1;
-        bottom = 2;
-        left = 1;
-        right = 2;
+        top = 2;
+        bottom =5;
+        left = 5;
+        right = 7;
         
         try {
             integralImage1 = new IntegralImage(image1);
