@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 
 /**
  *
  * @author jameselder
  */
+
 public class testSparseNumericVector {
 
     /**
@@ -53,7 +55,9 @@ public class testSparseNumericVector {
     public void Test2_AddOneAndCheckSize() {
     	SparseNumericVector X = new SparseNumericVector();
     	X.add(new SparseNumericElement(15, 3));
-    	System.out.println(X.toString());
+
+    	System.out.println(X.toString()+"\n-");
+
     	assertEquals(1,X.getSize(),"Size must be 1 when you add one element!");
     }
     
