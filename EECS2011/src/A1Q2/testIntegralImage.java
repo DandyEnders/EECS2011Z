@@ -13,9 +13,9 @@ public class testIntegralImage {
         double mean;
 
         IntegralImage integralImage1;
-        top = 2;
+        top = 0;
         bottom =5;
-        left = 5;
+        left = 0;
         right = 7;
         
         try {

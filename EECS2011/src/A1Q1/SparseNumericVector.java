@@ -101,13 +101,14 @@ public class SparseNumericVector implements Iterable {
 		  //refresh iterator
 		  itr = new SparseNumericIterator(this);
 		  while(itr.hasNext()){
-			  SparseNumericNode position = itr.position;
+			  SparseNumericNode prevPosition = itr.position;
+			  
 			  SparseNumericElement elemFirst = itr.next();
 			  SparseNumericElement elemSecond = itr.position.getElement();
 			  
 			  if(elemFirst.getIndex() < e.getIndex() && elemSecond.getIndex() > e.getIndex()){
-				  SparseNumericNode node = new SparseNumericNode(e, position.getNext());
-				  position.setNext(node);
+				  SparseNumericNode node = new SparseNumericNode(e, itr.position);
+				  prevPosition.setNext(node);
 				  break;
 			  }
 			  
@@ -130,7 +131,7 @@ public class SparseNumericVector implements Iterable {
         //implement this method
     	
         //this return statement is here to satisfy the compiler - replace it with your code.
-    	SparseNumericIterator itr = new SparseNumericIterator(this);
+    	
     	
     	//case 0 index out of bound
     	if(index < this.head.getElement().getIndex() || index > this.tail.getElement().getIndex()){
@@ -149,11 +150,19 @@ public class SparseNumericVector implements Iterable {
     	
     	//case 1.2 remove tail
     	if(this.tail.getElement().getIndex() == index){
+    		SparseNumericIterator itr2 = new SparseNumericIterator(this);
+    		while(itr2.position.getNext().getNext() != null) {
+    			itr2.next();
+    		}
+    		SparseNumericNode newTail = itr2.position;
+    		newTail.getNext().setNext(null);
+    		this.tail = newTail;
     		
     		return true;
     		
     	//case 1.3 remove middle
     	}else {
+    		SparseNumericIterator itr = new SparseNumericIterator(this);
 	    	while(itr.hasNext()){
 	    		SparseNumericNode nodeFirst = itr.position;
 	    		SparseNumericNode nodeSecond = nodeFirst.getNext();
