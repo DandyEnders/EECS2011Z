@@ -54,6 +54,33 @@ public class PatientTriage {
      */
     public Patient remove(Time currentTime) throws NullPointerException, EmptyQueueException, BoundaryViolationException {
     //implement this method
+    	
+    	if(currentTime == null) {
+    		throw new NullPointerException();
+    	}
+    	
+    	if(timeHeap.isEmpty() || priorityHeap.isEmpty()) {
+    		throw new EmptyQueueException();
+    	}
+    	
+    	Time deltaTime = timeHeap.peek().getArrivalTime().elapsed(currentTime);
+    	
+    	System.out.println("The time is " + deltaTime);
+    	
+    	TimeComparator comparator = new TimeComparator();
+    	
+    	Patient returnPatient;
+    	
+    	if(comparator.compare( deltaTime, maxWait ) > 0 ) {
+    		returnPatient = timeHeap.poll();
+    		priorityHeap.remove(returnPatient.getPriorityPos());
+    	}else {
+    		returnPatient = priorityHeap.poll();
+    		timeHeap.remove(returnPatient.getTimePos());
+    	}
+    	
+    	return returnPatient;
+    	
     }
 
    /**

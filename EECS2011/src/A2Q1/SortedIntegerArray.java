@@ -27,6 +27,9 @@ public class SortedIntegerArray {
  * @author jameselder
  */
     public boolean kPairSum(Integer k) { // 3 4 4 6 8 9
+    	if(sortedLongArray.length <= 1) {
+    		return false;
+    	}
     	return kPairSumInterval(k,0,sortedIntegerArray.length-1);
     }
     
