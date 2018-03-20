@@ -29,15 +29,15 @@ public class testFindAllInRange {
             System.out.println("Test Case 1 Failed");
         }
 
-        medals.put(1, "Norway");
-        medals.put(2, "Germany");
-        medals.put(3, "Canada");
-        medals.put(4, "USA");
+        medals.put(-10, "Norway");
+        medals.put(-6, "Germany");
+        medals.put(-5, "Canada");
+        medals.put(3, "USA");
         medals.put(5, "Netherlands");
         medals.put(6, "Sweden");
         medals.put(7, "South Korea");
         medals.put(8, "Switzerland");
-        medals.put(9, "France");
+        medals.put(5, "France");
         medals.put(10, "Austria");
 
         try { //should output Canada, USA, Netherlands, Sweden, South Korea 
@@ -59,6 +59,7 @@ public class testFindAllInRange {
             medalList = medals.findAllInRange(k1, k2);
             entryIter = medalList.iterator();
 
+            System.out.println("The countries ranked from " + k1 + " to " + k2 + " in medal standings are:");
             while (entryIter.hasNext()) {
                 System.out.println(entryIter.next().getValue());
             }

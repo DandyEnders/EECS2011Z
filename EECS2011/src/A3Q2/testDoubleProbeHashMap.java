@@ -35,6 +35,7 @@ public class testDoubleProbeHashMap {
                             System.out.println(marathonRunner.toString()); //print duplicates
                         }
                     } catch (Exception ex) {
+                    	ex.printStackTrace();
                         System.out.println("Incorrect: ProbeHashMap.put threw an exception.");
                     }
                 }

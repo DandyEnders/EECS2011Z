@@ -74,6 +74,7 @@ public class ProbeHashMap<K, V> extends AbstractHashMap<K, V> {
      */
     protected boolean isAvailable(int j) {
         return (table[j] == null || table[j] == DEFUNCT);
+        
     }
 
     /**

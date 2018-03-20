@@ -54,8 +54,14 @@ public class DoubleProbeHashMap<K, V> extends ProbeHashMap<K, V> {
      * entries.  Must also update secondary prime factor q.
      */
     protected void resize(int newCap) {
-        //Implement this method.  Note that you can make use of the resize 
-        //method of probleHashMap with a super.resize call.
+        Iterable<Entry<K,V>> entries = entrySet();
+        capacity = selectNewCapacity(newCap);
+        createTable();
+        n = 0;
+        q = selectSecondaryHashPrime(newCap);
+        for (Entry<K, V> e : entries) {
+            put(e.getKey(), e.getValue());
+        }
     }
 
     /**
@@ -71,7 +77,25 @@ public class DoubleProbeHashMap<K, V> extends ProbeHashMap<K, V> {
      * @return index of found entry or if not found
      */
     protected int findSlot(int h1, K k) {
-        //modify the findSlot method of probeHashMap to use double hashing
+    	int avail = -1;                               // no slot available (thus far)
+        int j = h1;                  // index while scanning table
+        int h2 = secondaryHashValue(k);
+        
+        do {
+            totalProbes++;
+            if (isAvailable(j)) {                       // may be either empty or defunct
+                if (avail == -1) {
+                    avail = j;               // this is the first available slot!
+                }
+                if (table[j] == null) {
+                    break;              // if empty, search fails immediately
+                }
+            } else if (table[j].getKey().equals(k)) {
+                return j;                                 // successful match
+            }
+            j = (j + h2) % capacity;                       // keep looking (cyclically)
+        } while (j != h1);                             // stop if we return to the start
+        return -(avail + 1);                          // search has failed
     }
 
     /**
@@ -79,7 +103,8 @@ public class DoubleProbeHashMap<K, V> extends ProbeHashMap<K, V> {
      * where k is the hash code for key (i.e. key.hashCode()).*
      */
     private int secondaryHashValue(K key) {
-        //implement this method
+    	int firsthash = hashValue(key);
+        return (q - firsthash % q);
     }
 
   //Selects secondary hash prime to be the largest prime less than cap
