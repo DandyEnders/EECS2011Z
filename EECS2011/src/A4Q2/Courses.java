@@ -48,18 +48,40 @@ public class Courses {
             CourseNumber courseNum2, CourseRequisite requisite) 
             throws InvalidCourseNumberException, CircularPreRequisiteException {
     	
+    	System.out.println(" requisite initiate ");
+    	Set<Vertex<CourseNumber>> firstKnown = new HashSet<Vertex<CourseNumber>>();
     	
-    	Map<Vertex<CourseNumber>,Edge<CourseRequisite>> forest = new TreeMap<Vertex<CourseNumber>,Edge<CourseRequisite>>();
-
-    	Edge<CourseRequisite> existRequisite = this.getRequisite(courseNum1, courseNum2);
+    	System.out.println(" 1 ");
+    	Course firstCourse = courseMap.get(courseNum1);
+    	Vertex<CourseNumber> firstCourseVertex = firstCourse.getCourseVertex();
     	
-    	Set<Vertex<CourseNumber>> searchedCourses = new HashSet<Vertex<CourseNumber>>();
+    	Course secondCourse = courseMap.get(courseNum2);
+    	Vertex<CourseNumber> secondCourseVertex = secondCourse.getCourseVertex();
     	
-    	Courses.<CourseNumber, CourseRequisite>DFS(courseGraph, firstCourse, searchedCourses, forest);
+    	Edge<CourseRequisite> returnRequisition = courseGraph.insertEdge(firstCourseVertex, secondCourseVertex, requisite);
     	
-    	/*Graph<CourseNumber,CourseRequisite>, Vertex<CourseNumber>, Set<Vertex<CourseNumber>>, Map<Vertex<CourseNumber>,Edge<CourseRequisite>>
-    	 AdjacencyMapGraph<CourseNumber,CourseRequisite>, CourseNumber, HashSet<Vertex<CourseNumber>>, Map<Vertex<CourseNumber>,Edge<CourseRequisite>>*/
-        return null;
+    	System.out.println(" 2 ");
+    	Map<Vertex<CourseNumber>,Edge<CourseRequisite>> forest = new ProbeHashMap<Vertex<CourseNumber>,Edge<CourseRequisite>>();
+    	
+    	System.out.println(" 3 ");
+    	Courses.<CourseNumber, CourseRequisite>DFS(courseGraph, firstCourseVertex, firstKnown, forest);
+    	
+    	System.out.println(" 4 ");
+    	if(forest.size() != courseGraph.numEdges()){ // back edge exist, loop exist.
+    		System.out.println("removed edge");
+    		try {
+    		courseGraph.removeEdge(returnRequisition);
+    		}catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    		throw new CircularPreRequisiteException();
+    	} else {
+    		System.out.println("NO EXCEPTION, ");
+    	}
+    	
+    	System.out.println("first known list : " + firstKnown.toString());
+    	
+    	return returnRequisition;
    }
     
   /**
