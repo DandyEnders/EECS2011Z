@@ -104,7 +104,7 @@ public class DoubleProbeHashMap<K, V> extends ProbeHashMap<K, V> {
      */
     private int secondaryHashValue(K key) {
     	int firsthash = hashValue(key);
-        return (q - firsthash % q);
+        return Math.abs(q - firsthash % q);
     }
 
   //Selects secondary hash prime to be the largest prime less than cap
