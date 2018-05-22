@@ -1,0 +1,10 @@
+12345 John 1
+23432 Jim 2
+53464 Apple 5
+76556 Canada 10
+85634 Phrase 50
+54367 Problem 3
+23421 Test 5
+54323 Jonny 17
+53535 Friend 28
+88885 Aladdin 20
