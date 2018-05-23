@@ -47,16 +47,21 @@ public class Courses {
     public Edge<CourseRequisite> putRequisite(CourseNumber courseNum1, 
             CourseNumber courseNum2, CourseRequisite requisite) 
             throws InvalidCourseNumberException, CircularPreRequisiteException {
-    	
+   
     	System.out.println(" requisite initiate ");
     	Set<Vertex<CourseNumber>> firstKnown = new HashSet<Vertex<CourseNumber>>();
     	
     	System.out.println(" 1 ");
-    	Course firstCourse = courseMap.get(courseNum1);
-    	Vertex<CourseNumber> firstCourseVertex = firstCourse.getCourseVertex();
     	
-    	Course secondCourse = courseMap.get(courseNum2);
-    	Vertex<CourseNumber> secondCourseVertex = secondCourse.getCourseVertex();
+    	/*
+    	Course firstCourse = courseMap.get(courseNum1);*/
+    	Vertex<CourseNumber> firstCourseVertex = courseMap.get(courseNum1).getCourseVertex();
+    	/*
+    	Course secondCourse = courseMap.get(courseNum2);*/
+    	Vertex<CourseNumber> secondCourseVertex = courseMap.get(courseNum2).getCourseVertex();
+    	
+    	//System.out.println("is firstCourseVertex instance of innervertex " + (firstCourseVertex instanceof AdjacencyMapGraph.InnerVertex)  );
+    	
     	
     	Edge<CourseRequisite> returnRequisition = courseGraph.insertEdge(firstCourseVertex, secondCourseVertex, requisite);
     	
@@ -66,11 +71,13 @@ public class Courses {
     	System.out.println(" 3 ");
     	Courses.<CourseNumber, CourseRequisite>DFS(courseGraph, firstCourseVertex, firstKnown, forest);
     	
+    	
+    	
     	System.out.println(" 4 ");
     	if(forest.size() != courseGraph.numEdges()){ // back edge exist, loop exist.
     		System.out.println("removed edge");
     		try {
-    		courseGraph.removeEdge(returnRequisition);
+    			courseGraph.removeEdge(courseGraph.getEdge(firstCourseVertex, secondCourseVertex));
     		}catch(Exception e) {
     			e.printStackTrace();
     		}
@@ -82,6 +89,7 @@ public class Courses {
     	System.out.println("first known list : " + firstKnown.toString());
     	
     	return returnRequisition;
+    	
    }
     
   /**
